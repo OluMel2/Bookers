@@ -14,6 +14,8 @@
       <span><%= @book.body =%></span>
     </p>
     
+    <a><%= link_to "Edit", edit_book_path(@book.id) %></a>
+    <a><%= link_to "Back", book_index_path(@book.id) %></a>
     
   </body>
 </html>
