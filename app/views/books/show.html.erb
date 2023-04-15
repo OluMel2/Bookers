@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="./assets/books.css">
   </head>
   <body>
+    <% if flash[:notice] %>
+    <div  >
+    <p style="color:green;"><%= flash[:notice] %></p>
+    </div>
+    <% end %>
     
     <p>
       <strong>Title:</strong>
@@ -16,6 +21,8 @@
     
     <a><%= link_to "Edit", edit_book_path(@book.id) %></a>
     <a><%= link_to "Back", books_path %></a>
+    
+    
     
   </body>
 </html>
