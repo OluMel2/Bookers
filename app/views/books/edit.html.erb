@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
+
   </head>
   <body>
     <h1>Edditing Book</h1>
-    
-    
+
+    <%= form_with model: @book do |f| %>
+
+    <div class="field">Title</div>
+    <%= f.text_field :title %>
+
+    <div class="fiels">Body</div>
+    <%= f.text_area :body %>
+
+    <div class="action">
+
+      <%= f.submit 'Show' %>
+      <%= f.submit 'Back' %>
+
+      <% end %>
+
+    </div>
+
   </body>
 </html>
