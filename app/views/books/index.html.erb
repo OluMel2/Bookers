@@ -4,8 +4,7 @@
     <link rel="stylesheet" href="./assets/books.css">
   </head>
   <body>
-
-    <h1>Books</h1>
+   <h1>Books</h1>
     <table>
       <thead>
         <tr>
@@ -22,10 +21,18 @@
 
         </tr>
           <% end %>
-          
-          
+
+
       </thead>
     </table>
+    <% if @book.errors.any? %>
+     <%= @book.errors.count %>件のエラーが発生しました
+     <ul>
+       <% @book.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+       <% end %>
+     </ul>
+     <% end %>
     <h2>New book</h2>
     <%= form_with model: @book do |f| %>
     <div class="field">
