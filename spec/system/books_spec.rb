@@ -2,16 +2,28 @@ require 'rails_helper'
 
 describe '投稿のテスト' do
   let!(:book) { create(:book,title:'hoge',body:'body') }
+  #データの作成を行い「book」として使用することが可能です。
+  #letで指定されたものは遅延評価といってitの中でbookが出てきたときに始めて実行されます。
+  #今回のlet!は事前評価といいます。beforeと似たような使われ方をされますが、beforeではitブロックの実行時に都度実行されます。
+  #そのためit内で使用しない変数の場合にもbeforeは実行されてしまいます。
   describe 'トップ画面(root_path)のテスト' do
-    before do 
+    before do
       visit root_path
     end
+    #visitは指定したパスへの画面遷移を行います。
+    #今回の場合ルートパス（トップ画面）への遷移をbeforeフックとして実行させています。
+    #この理由は、以降の続くit、2つのブロックでルートパス（トップ画面）への遷移を前提条件としているためです。
     context '表示の確認' do
       it 'トップ画面(root_path)に一覧ページへのリンクが表示されているか' do
         expect(page).to have_link "", href: books_path
+        #expect(page)で現在visitメソッドなどで開いているページ全体について調べています。
+        #have_linkではそのページの中のaタグ（link_toヘルパー）で、指定した文字列とhref属性を持ったものが存在するかを判定しています。
+        #今回の場合はhrefにbooksの一覧画面への遷移URLが存在するかをチェックしています。
       end
       it 'root_pathが"/"であるか' do
         expect(current_path).to eq('/')
+        #expect(current_path)で現在のページURLを調べています。
+        #eqは、指定した値とexpectの値が同値であるかを判定します。
       end
     end
   end
@@ -108,7 +120,7 @@ describe '投稿のテスト' do
       it 'Backリンクが表示される' do
         back_link = find_all('a')[1]
         expect(back_link.native.inner_text).to match(/back/i)
-			end  
+			end
     end
     context 'リンクの遷移先の確認' do
       it 'Editの遷移先は編集画面か' do
@@ -138,11 +150,11 @@ describe '投稿のテスト' do
       it 'Showリンクが表示される' do
         show_link = find_all('a')[0]
         expect(show_link.native.inner_text).to match(/show/i)
-			end  
+			end
       it 'Backリンクが表示される' do
         back_link = find_all('a')[1]
         expect(back_link.native.inner_text).to match(/back/i)
-			end  
+			end
     end
     context 'リンクの遷移先の確認' do
       it 'Showの遷移先は詳細画面か' do
