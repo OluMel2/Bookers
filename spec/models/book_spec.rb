@@ -1,11 +1,15 @@
 # frozen_string_literal: true
+#文字列リテラルをfreeze（破壊的変更を防止）させています。
+#RSpecとは関係ありません。記述がなくても動作します。
 
 require 'rails_helper'
+#spec/rails_helper.rbを読み込んでいます。設定などを行うファイルです。
 
 RSpec.describe Book, "モデルに関するテスト", type: :model do
   describe '実際に保存してみる' do
     it "有効な投稿内容の場合は保存されるか" do
       expect(FactoryBot.build(:book)).to be_valid
+      #FactoryBot.build(:book)で作成したBookモデルのインスタンスをexpectに渡して、be_validで有効かを判定しています。
     end
   end
   context "空白のバリデーションチェック" do
@@ -18,6 +22,8 @@ RSpec.describe Book, "モデルに関するテスト", type: :model do
       book = Book.new(title: 'hoge', body:'')
       expect(book).to be_invalid
       expect(book.errors[:body]).to include("can't be blank")
+      #マッチャーのincludeは配列の中身に〇〇が含まれているかを判定します。
+      #今回の場合はexpectにエラーメッセージの配列を渡して、その配列の中に"can't be blank"という要素が含まれるかを判定しています。
     end
   end
   feature "titleを空白で投稿した場合に画面にエラーメッセージが表示されているか" do
@@ -40,6 +46,6 @@ RSpec.describe Book, "モデルに関するテスト", type: :model do
       expect(page).to have_content "can't be blank"
     end
   end
-  
+
 
 end
