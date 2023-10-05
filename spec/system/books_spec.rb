@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '投稿のテスト' do
+describe '投稿のテストです' do
   let!(:book) { create(:book,title:'hoge',body:'body') }
   #データの作成を行い「book」として使用することが可能です。
   #letで指定されたものは遅延評価といってitの中でbookが出てきたときに始めて実行されます。
